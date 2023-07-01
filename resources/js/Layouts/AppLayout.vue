@@ -8,10 +8,8 @@ import JetDropdownLink from '@/Jetstream/DropdownLink.vue'
 import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink.vue'
 import Icon from '@/Components/Icon.vue'
 import Index from '@/Components/Index.vue'
-import SupportModal from '@/Components/SupportModal.vue'
 
 const showingNavigationDropdown = ref(false)
-const showingSupportModal = ref(false)
 const theme = ref(localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light')
 
 const switchToTeam = (team) => {
@@ -239,20 +237,6 @@ onUnmounted(() => {
                     </JetDropdownLink>
 
                     <JetDropdownLink
-                      :href="route('spark.portal')"
-                      as="a"
-                    >
-                      Billing
-                    </JetDropdownLink>
-
-                    <JetDropdownLink
-                      as="button"
-                      @click="showingSupportModal = true"
-                    >
-                      Support &amp; Requests
-                    </JetDropdownLink>
-
-                    <JetDropdownLink
                       v-if="$page.props.jetstream.hasApiFeatures"
                       :href="route('api-tokens.index')"
                     >
@@ -388,20 +372,6 @@ onUnmounted(() => {
                 </JetResponsiveNavLink>
 
                 <JetResponsiveNavLink
-                  :href="route('spark.portal')"
-                  as="a"
-                >
-                  Billing
-                </JetResponsiveNavLink>
-
-                <JetResponsiveNavLink
-                  as="button"
-                  @click="showingSupportModal = true"
-                >
-                  Support &amp; Requests
-                </JetResponsiveNavLink>
-
-                <JetResponsiveNavLink
                   v-if="$page.props.jetstream.hasApiFeatures"
                   :href="route('api-tokens.index')"
                   :active="route().current('api-tokens.index')"
@@ -516,11 +486,6 @@ onUnmounted(() => {
       <main class="flex-1 flex flex-col">
         <slot />
       </main>
-
-      <SupportModal
-        :show="showingSupportModal"
-        @close="showingSupportModal = false"
-      />
     </div>
   </div>
 </template>

@@ -21,8 +21,6 @@ class CollectionBulletController extends Controller
             'user_id' => $request->user()->id,
         ]);
 
-        broadcast(new CollectionUpdated($collection->id))->toOthers();
-
         return redirect(route('c.show', $collection));
     }
 
@@ -33,12 +31,6 @@ class CollectionBulletController extends Controller
         $bullet->update($request->only(
             array_merge(['name', 'state'], $bullet->user_id === $request->user()->id ? ['date'] : [])
         ));
-
-        broadcast(new CollectionUpdated($collection->id))->toOthers();
-
-        if ($bullet->date) {
-            broadcast(new DailyLogUpdated($bullet->user_id))->toOthers();
-        }
 
         return redirect(route('c.show', $collection));
     }
@@ -58,12 +50,6 @@ class CollectionBulletController extends Controller
         $bullet->save();
         $bullet->moveToEnd();
 
-        broadcast(new CollectionUpdated($collection->id))->toOthers();
-
-        if ($bullet->date) {
-            broadcast(new DailyLogUpdated($bullet->user_id))->toOthers();
-        }
-
         return back();
     }
 
@@ -72,12 +58,6 @@ class CollectionBulletController extends Controller
         $this->authorize('update', $collection);
 
         $bullet->delete();
-
-        broadcast(new CollectionUpdated($collection->id))->toOthers();
-
-        if ($bullet->date) {
-            broadcast(new DailyLogUpdated($bullet->user_id))->toOthers();
-        }
 
         return redirect(route('c.show', $collection));
     }

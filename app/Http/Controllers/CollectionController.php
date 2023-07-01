@@ -43,8 +43,6 @@ class CollectionController extends Controller
 
         $collection->update($request->only(['name', 'type', 'hide_done']));
 
-        broadcast(new CollectionUpdated($collection->id))->toOthers();
-
         return redirect(route('c.show', $collection));
     }
 
@@ -55,14 +53,6 @@ class CollectionController extends Controller
         $bullets = $collection->bullets;
 
         $collection->delete();
-
-        broadcast(new CollectionUpdated($collection->id))->toOthers();
-
-        $bullets
-            ->filter(fn ($bullet) => $bullet->date)
-            ->pluck('user_id')
-            ->unique()
-            ->each(fn ($userId) => broadcast(new DailyLogUpdated($userId))->toOthers());
 
         return redirect(route('daily-log.index'));
     }

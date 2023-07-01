@@ -55,8 +55,6 @@ class DailyLogController extends Controller
             'state' => 'incomplete',
         ]);
 
-        broadcast(new DailyLogUpdated($request->user()->id))->toOthers();
-
         return redirect(route('daily-log.index'));
     }
 
@@ -65,12 +63,6 @@ class DailyLogController extends Controller
         $this->authorize($bullet);
 
         $bullet->update($request->only(['name', 'state', 'date']));
-
-        broadcast(new DailyLogUpdated($request->user()->id))->toOthers();
-
-        if ($bullet->collection_id) {
-            broadcast(new CollectionUpdated($bullet->collection_id))->toOthers();
-        }
 
         return redirect(route('daily-log.index'));
     }
@@ -82,15 +74,9 @@ class DailyLogController extends Controller
 
         $this->authorize('update', $bullet);
 
-        if ($bullet->collection_id) {
-            broadcast(new CollectionUpdated($bullet->collection_id))->toOthers();
-        }
-
         $bullet->collection_id = null;
         $bullet->date = $request->input('date');
         $bullet->save();
-
-        broadcast(new DailyLogUpdated($request->user()->id))->toOthers();
 
         return back();
     }
@@ -100,12 +86,6 @@ class DailyLogController extends Controller
         $this->authorize($bullet);
 
         $bullet->delete();
-
-        broadcast(new DailyLogUpdated($request->user()->id))->toOthers();
-
-        if ($bullet->collection_id) {
-            broadcast(new CollectionUpdated($bullet->collection_id))->toOthers();
-        }
 
         return redirect(route('daily-log.index'));
     }

@@ -7,7 +7,6 @@ use App\Http\Controllers\CollectionOrderController;
 use App\Http\Controllers\CollectionUserController;
 use App\Http\Controllers\DailyLogController;
 use App\Http\Controllers\UserPreferenceController;
-use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,22 +24,8 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function (Request $request) {
-    if ($request->user()) {
-        return redirect()->to(route('daily-log.index'));
-    }
-
-    return view('welcome');
+    return to_route('daily-log.index');
 });
-
-Route::get('/email/verify', function () {
-    return Inertia::render('Auth/VerifyEmail');
-})->middleware('auth')->name('verification.notice');
-
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-
-    return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
@@ -48,7 +33,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/daily-log');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::patch('user/preferences', [UserPreferenceController::class, 'update'])->name('user-preferences.update');
 
     Route::put('daily-log', [DailyLogController::class, 'move'])->name('daily-log.move');
@@ -74,6 +59,4 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::resource('c.users', CollectionUserController::class)
         ->only('store', 'destroy')
         ->parameters(['c' => 'collection']);
-
-    Route::inertia('debug', 'Debug');
 });

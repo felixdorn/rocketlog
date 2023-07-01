@@ -40,7 +40,7 @@ class HandleInertiaRequests extends Middleware
             parent::share($request),
             [
                 'csrf_token' => csrf_token(),
-                'showSubscriptionPrompt' => $request->user() && ! $request->user()->subscribed() && ! $request->user()->onTrial(),
+                'showSubscriptionPrompt' => false
             ],
             $request->user() ? [
                 'collections' => fn () => $request->user()->collections,

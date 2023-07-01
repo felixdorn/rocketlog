@@ -11,9 +11,8 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spark\Billable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
-    use Billable;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;

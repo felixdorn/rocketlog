@@ -37,9 +37,3 @@ createInertiaApp({
 })
 
 InertiaProgress.init({ color: '#8B5CF6' })
-
-Inertia.on('navigate', () => {
-    if (typeof window.fathom !== 'undefined') {
-        window.fathom.trackPageview();
-    }
-});

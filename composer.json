@@ -8,8 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.0",
-        "beyondcode/laravel-websockets": "^2.0",
+        "php": "^8.2",
         "doctrine/dbal": "^3.4",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.6",
@@ -17,7 +16,6 @@
         "laravel/horizon": "^5.10",
         "laravel/jetstream": "^2.12",
         "laravel/sanctum": "^3.0",
-        "laravel/spark-paddle": "1.2.1",
         "laravel/tinker": "^2.7",
         "mtvs/eloquent-hashids": "^3.3",
         "pusher/pusher-php-server": "^7.2",
@@ -30,7 +28,6 @@
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
         "laravel/dusk": "^6.25",
-        "laravel/sail": "^1.16",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.3",
         "phpunit/phpunit": "^9.5.10",
@@ -39,7 +36,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     },
     "extra": {
         "laravel": {

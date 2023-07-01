@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->string('name');
             $table->string('state');
             $table->boolean('priority')->default(false);
+            $table->date('date')->nullable();
+            $table->unsignedInteger('order')->nullable();
             $table->timestamps();
         });
     }
