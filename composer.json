@@ -29,7 +29,7 @@
         "fakerphp/faker": "^1.9.1",
         "laravel/dusk": "^6.25",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.3",
+        "nunomaduro/collision": "^7.1",
         "phpunit/phpunit": "^9.5.10",
         "spatie/laravel-ignition": "^1.5"
     },
