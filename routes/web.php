@@ -23,6 +23,10 @@ use Inertia\Inertia;
 |
 */
 
+Route::get('/', function (Request $request) {
+    return to_route('daily-log.index');
+});
+
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::patch('user/preferences', [UserPreferenceController::class, 'update'])->name('user-preferences.update');
 
