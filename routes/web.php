@@ -23,16 +23,6 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function (Request $request) {
-    return to_route('daily-log.index');
-});
-
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-
-    return redirect('/daily-log');
-})->middleware(['auth', 'signed'])->name('verification.verify');
-
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::patch('user/preferences', [UserPreferenceController::class, 'update'])->name('user-preferences.update');
 
