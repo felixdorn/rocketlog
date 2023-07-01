@@ -6,3 +6,5 @@ I forgot to actually fork it so:
 
 [https://rocketlog.app](https://rocketlog.app) 
 [github.com/jessarcher/rocketlog](github.com/jessarcher/rocketlog)
+
+All good things should be credited to the original author. All bad things are mine.
