@@ -250,5 +250,5 @@ return [
 
     ],
 
-    'registration_enabled' => env('REGISTRATION_ENABLED', false),
+    'registration_enabled' => env('APP_REGISTRATION_ENABLED', false),
 ];
