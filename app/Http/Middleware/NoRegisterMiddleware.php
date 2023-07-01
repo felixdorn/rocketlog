@@ -9,7 +9,7 @@ class NoRegisterMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (config('app.registration_enabled') || !$request->routeIs('register')) {
+        if (config('app.registration_enabled') || !$request->is('register')) {
             return $next($request);
         }
 
