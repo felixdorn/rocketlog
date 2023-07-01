@@ -20,6 +20,10 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
+        if (!config('app.registration_enabled')) {
+            // Just another safe guard
+            throw new \Exception('Registration is disabled');
+        }
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
